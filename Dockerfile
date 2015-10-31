@@ -18,7 +18,6 @@ RUN apt-get -y install wget;
 
 RUN curl https://install.meteor.com | /bin/sh;
 
-RUN touch /etc/nginx/sites-available/lookback;
 RUN adduser --shell /bin/bash --home /home/$NODE_USER --disabled-password $NODE_USER;
 RUN mkdir binaries
 RUN cd binaries && wget http://nodejs.org/dist/$NODE_VERSION/$NODE_TAR
