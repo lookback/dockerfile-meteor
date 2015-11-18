@@ -1,24 +1,26 @@
-FROM ubuntu:14.04
+FROM centos:7
 MAINTAINER :-Datacarl <carl@lookback.io>
 
-ENV NODE_USER node
 ENV NODE_VERSION v0.10.40
 ENV NODE_TAR node-$NODE_VERSION-linux-x64.tar.gz
 
-RUN apt-get update
-RUN apt-get -y install software-properties-common;
-RUN apt-get -y install python-software-properties;
-RUN apt-get -qq update;
-RUN apt-get -y upgrade;
-RUN apt-get -y install fontconfig;
-RUN apt-get -y install phantomjs;
-RUN apt-get -y install curl;
-RUN apt-get -y install git;
-RUN apt-get -y install wget;
+RUN yum -y update
+RUN yum -y upgrade;
+RUN yum -y install curl;
+RUN yum -y install git;
+RUN yum -y install wget;
+RUN yum -y install tar;
+RUN yum -y install fontconfig freetype freetype-devel fontconfig-devel libstdc++
+RUN yum -y install bzip2;
+
+RUN wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.8-linux-x86_64.tar.bz2
+
+RUN mkdir -p /opt/phantomjs
+RUN tar -xjf phantomjs-1.9.8-linux-x86_64.tar.bz2 --strip-components 1 -C /opt/phantomjs/
+RUN ln -s /opt/phantomjs/bin/phantomjs /usr/bin/phantomjs
 
 RUN curl https://install.meteor.com | /bin/sh;
 
-RUN adduser --shell /bin/bash --home /home/$NODE_USER --disabled-password $NODE_USER;
 RUN mkdir binaries
 RUN cd binaries && wget http://nodejs.org/dist/$NODE_VERSION/$NODE_TAR
 RUN tar xf binaries/$NODE_TAR  --directory binaries/
