@@ -31,6 +31,6 @@ RUN ls -la /usr/bin | grep 'node'
 RUN node --version;
 
 ## download and install the meteor build tool
-RUN meteor create --release 1.2.0.2 test
+RUN meteor create --release 1.2.1 test
 RUN cd test && meteor --get-ready
 RUN rm -rf test
