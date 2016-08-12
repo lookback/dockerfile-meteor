@@ -1,7 +1,7 @@
 FROM centos:7
 MAINTAINER :-Datacarl <carl@lookback.io>
 
-ENV NODE_VERSION v0.10.40
+ENV NODE_VERSION v0.10.43
 ENV NODE_TAR node-$NODE_VERSION-linux-x64.tar.gz
 
 RUN yum -y update
@@ -31,6 +31,6 @@ RUN ls -la /usr/bin | grep 'node'
 RUN node --version;
 
 ## download and install the meteor build tool
-RUN meteor create --release 1.2.1 test
+RUN meteor create --release 1.3.4.4 test
 RUN cd test && meteor --get-ready
 RUN rm -rf test
