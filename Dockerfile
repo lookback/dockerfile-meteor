@@ -13,6 +13,9 @@ RUN yum -y install tar;
 RUN yum -y install fontconfig freetype freetype-devel fontconfig-devel libstdc++
 RUN yum -y install bzip2;
 
+# to install fibers with npm http://stackoverflow.com/questions/14772508/npm-failed-to-install-time-with-make-not-found-error
+RUN yum install -y make gcc*
+
 RUN wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.8-linux-x86_64.tar.bz2
 
 RUN mkdir -p /opt/phantomjs
