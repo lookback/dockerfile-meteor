@@ -1,8 +1,7 @@
 FROM centos:7
 MAINTAINER :-Datacarl <carl@lookback.io>
 
-ENV NODE_VERSION v0.10.43
-ENV NODE_TAR node-$NODE_VERSION-linux-x64.tar.gz
+RUN curl --silent --location https://rpm.nodesource.com/setup_4.x | bash -
 
 RUN yum -y update && yum -y upgrade && yum -y install \
   curl \
@@ -18,7 +17,10 @@ RUN yum -y update && yum -y upgrade && yum -y install \
   # make and gcc to install fibers with npm http://stackoverflow.com/questions/14772508/npm-failed-to-install-time-with-make-not-found-error
   make \
   gcc* \
+  nodejs-4.5.0 \
 && yum clean all
+
+RUN node --version;
 
 RUN mkdir -p /opt/phantomjs
 ENV PHANTOM_FILE_NAME=phantomjs-1.9.8-linux-x86_64.tar.bz2
@@ -29,16 +31,7 @@ RUN wget https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOM_FILE_NAME \
 
 RUN curl https://install.meteor.com | /bin/sh;
 
-RUN mkdir binaries
-RUN cd binaries && wget http://nodejs.org/dist/$NODE_VERSION/$NODE_TAR
-RUN tar xf binaries/$NODE_TAR  --directory binaries/
-RUN ls -la binaries/
-RUN ln -s /binaries/node-$NODE_VERSION-linux-x64/bin/node /usr/bin/node
-RUN ln -s /binaries/node-$NODE_VERSION-linux-x64/bin/npm /usr/bin/npm
-RUN ls -la /usr/bin | grep 'node'
-RUN node --version;
-
 ## download and install the meteor build tool
-RUN meteor create --release 1.3.4.4 test \
+RUN meteor create --release 1.4.1.1 test \
 && cd test && meteor --get-ready \
 && cd .. && rm -rf test
