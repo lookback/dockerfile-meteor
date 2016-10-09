@@ -33,5 +33,4 @@ RUN curl https://install.meteor.com | /bin/sh;
 
 ## download and install the meteor build tool
 RUN meteor create --release 1.4.1.1 test \
-&& cd test && meteor --get-ready \
-&& cd .. && rm -rf test
+&& rm -rf test
