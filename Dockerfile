@@ -22,13 +22,6 @@ RUN yum -y update && yum -y upgrade && yum -y install \
 
 RUN node --version;
 
-RUN mkdir -p /opt/phantomjs
-ENV PHANTOM_FILE_NAME=phantomjs-1.9.8-linux-x86_64.tar.bz2
-RUN wget https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOM_FILE_NAME \
-&& tar -xjf $PHANTOM_FILE_NAME --strip-components 1 -C /opt/phantomjs/ \
-&& ln -s /opt/phantomjs/bin/phantomjs /usr/bin/phantomjs \
-&& rm -rf $PHANTOM_FILE_NAME
-
 RUN curl https://install.meteor.com | /bin/sh;
 
 ## download and install the meteor build tool
