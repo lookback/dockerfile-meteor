@@ -22,8 +22,3 @@ RUN yum -y update && yum -y upgrade && yum -y install \
 
 RUN node --version;
 
-RUN curl https://install.meteor.com | /bin/sh;
-
-## download and install the meteor build tool
-RUN meteor create --release 1.4.1.1 test \
-&& rm -rf test
